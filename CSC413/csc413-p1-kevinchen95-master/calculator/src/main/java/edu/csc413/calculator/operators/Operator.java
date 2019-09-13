@@ -18,11 +18,18 @@ public abstract class Operator {
     // operators.put( "+", new AdditionOperator() );
     // operators.put( "-", new SubtractionOperator() );
 
-    private static HashMap<String,Operator> operatorMap;
+    private static HashMap<String,Operator> operatorMap = new HashMap<String,Operator>();
 
+    static  {
+        operatorMap.put("+",new AddOperator());
+        // replaced - with ~ to differentiate negatives from subtraction
+        operatorMap.put("~",new SubtractOperator());
+        operatorMap.put("/",new DivideOperator());
+        operatorMap.put("*",new MultiplyOperator());
+        operatorMap.put("^",new PowerOperator());
+    }
     // Default constructor
     public Operator()  {
-        operatorMap = new HashMap<String,Operator>();
     }
 
     /**
@@ -44,7 +51,7 @@ public abstract class Operator {
      * Think about what happens if we add more operators.
      */
     public static boolean check(String token) {
-        if (token.equals("+") || token.equals("- ") || token.equals("*")  || token.equals("/")  || token.equals("^") )  {
+        if (token.equals("+") || token.equals("~") || token.equals("*")  || token.equals("/")  || token.equals("^") )  {
             return true;
         }
         return false;
@@ -59,6 +66,8 @@ public abstract class Operator {
      * @return reference to a Operator instance.
      */
     public static Operator getOperator(String token) {
-        return null;
+        System.out.println("token is : " + token);
+        return operatorMap.get(token);
     }
+
 }

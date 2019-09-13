@@ -127,10 +127,12 @@ public class EvaluatorUI extends JFrame implements ActionListener {
             //else if is operand
             //do stuff
         }
-        else if ( buttonLabel.equals("="))  {
-            //operate
-        }
         calculatorText+=buttonLabel;
+        if ( buttonLabel.equals("="))  {
+            //operate
+            Evaluator tempEval = new Evaluator();
+            calculatorText = "" + tempEval.eval(calculatorText.substring(0,calculatorText.length()-1));
+        }
         txField.setText(calculatorText);
         System.out.println(calculatorText);
         //if its an operand
